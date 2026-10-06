@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?&family=Kulim+Park:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600;1,700");
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #d6a99d;
+  --color-secondary: #fbf3d5;
+  --color-accent: #d6dac8;
+
+  --color-light: #ffffff;
+  --color-dark: #9cafaa;
+
+  --font-main: "Kulim Park", sans-serif;
+
+  --breakpoint-xs: 200px;
+}
+
+@layer base {
+  body {
+    @apply bg-linear-to-r from-gray-200 to-gray-300 h-screen w-screen flex justify-center items-center;
+  }
+
+  .container {
+    @apply max-w-md py-2 px-6;
+  }
+}
+
+@layer components {
+  /* btns */
+  .btn-primary {
+    @apply bg-primary p-1 rounded-md hover:cursor-pointer active:scale-95 transition;
+  }
+
+  /* card */
+  .main-card {
+    @apply bg-secondary w-100 rounded-xl h-100 shadow-2xl shadow-black flex flex-col space-y-6;
+  }
+
+  .navBar {
+    @apply rounded-2xl mt-4 flex justify-center items-center gap-3  shadow-2xl shadow-black;
+  }
+  .navBar-list {
+    @apply hover:bg-primary   hover:scale-[95%] hover:shadow-md hover:cursor-pointer px-6 rounded-xl py-3 transition;
+  }
+
+  .checkbox-task {
+    @apply accent-primary;
+  }
+
+  .checkbox-task:checked + .title-task {
+    @apply underline;
+  }
+  /* .header-card{
+    
+
+   } */
+  .menu:active {
+    @apply bg-primary rounded-md;
+  }
+  .popUp {
+    @apply size-20 bg-amber-800 hidden absolute;
+  }
+  .menu:active > .popUp {
+    @apply flex;
+  }
+}
