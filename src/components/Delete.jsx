@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { tasks } from "../contexts/tasks";
+
 export default function Delete() {
+    const dataOfTasks = useContext(tasks);
+  console.log(dataOfTasks);
   return (
     <>
       <div className="space-x-2 flex justify-center items-center">
