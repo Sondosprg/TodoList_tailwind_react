@@ -1,44 +1,51 @@
-import { useState } from "react";
-import PopUp from "./popUp";
+import Task from "./Task";
+import { tasksContext } from "../contexts/tasks";
+import { useContext } from "react";
 
-export default function CardHeader() {
+import { useState } from "react";
+import PopUp from "./popUp.jsx";
+
+
+export default function Tasks() {
+  const contextTasks = useContext(tasksContext);
+  console.log("Card.jsx");
+  console.log("contextTasks : ", contextTasks);
+
   const [isOpenMenu, setOpenMenu] = useState(false);
   const [isOpenPopUp, setOpenPopUp] = useState(false);
-  // const [task , setTask] = useState({id : "" , title : ""});
   const [operation, setOperation] = useState("");
+
 
   return (
     <>
-      <div className="flex items-center ml-[1.01rem] w-fit pt-2 gap-2 relative">
-        <button
-          onClick={() => setOpenMenu(!isOpenMenu)}
-          className="hover:cursor-pointer hover:bg-accent/90 rounded-md active:scale-95"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className={"size-5"}
-          >
-            <path
-              strokeLinecap="rounded"
-              strokeLinejoin="round"
-              d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"
-            />
-          </svg>
-        </button>
-        <h3 className="uppercase font-bold text-primary ">Today tasks</h3>
+      <div
+        className="relative container overflow-y-scroll flex flex-col gap-2 h-70 scrollbar-none cursor-pointer"
+        onClick={(e) => {
+          if (e.target.classList.contains("checkbox-task")) {
+            console.log("===========OPEN=============");
+            setOpenMenu(!isOpenMenu);
+          }
+        }}
+      >
+        {contextTasks.map((task) => (
+          <Task id={task.id} title={task.title} key={task.id} />
+        ))}
       </div>
+
       <div
         className={
           isOpenMenu
-            ? "size-25 bg-accent absolute  top-25 left-100 rounded-md transition shadow z-100"
+            ? " bg-accent absolute w-100 h-50  rounded-t-md transition shadow z-100"
             : "hidden"
         }
       >
+           <div class="size-6 cursor-pointer rounded-full flex items-center justify-center m-2 bg-primary text-center">
+                <span class="align-middle inline-block">x</span>
+                {/* <span class="inline-block align-middle">The quick brown fox...</span> */}
+
+            </div>
         <ul className="flex flex-col items-center justify-center gap-2 w-full h-full">
+         
           <li
             className="hover:bg-primary w-auto px-2 hover:cursor-pointer text-center transition rounded-md active:scale-95"
             onClick={() => {
@@ -53,7 +60,7 @@ export default function CardHeader() {
             className="hover:bg-primary w-auto px-2 hover:cursor-pointer text-center transition rounded-md active:scale-95"
             onClick={() => {
               setOpenMenu(false);
-              setOpenPopUp(true);
+             setOpenPopUp(true);
               setOperation("edit");
             }}
           >
@@ -69,6 +76,7 @@ export default function CardHeader() {
           >
             delete
           </li>
+          
         </ul>
       </div>
 
