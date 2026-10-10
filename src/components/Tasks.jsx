@@ -19,7 +19,7 @@ export default function Tasks() {
   return (
     <>
       <div
-        className="relative container overflow-y-scroll flex flex-col gap-2 h-70 scrollbar-none cursor-pointer"
+        className="relative  px-4  overflow-y-scroll flex flex-col gap-2 h-70 scrollbar-none cursor-pointer"
         onClick={(e) => {
           if (e.target.classList.contains("checkbox-task")) {
             console.log("===========OPEN=============");
