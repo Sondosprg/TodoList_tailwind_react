@@ -7,7 +7,7 @@ import { useState } from "react";
 
 // contexts
 import { tasksContext } from "../contexts/tasks.js";
-import { popUpContext } from "../contexts/popUp.jsx";
+import { popUpContext } from "../contexts/popUp.js";
 
 export default function Home() {
   // context of tasks
@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <>
       <tasksContext.Provider value={{ value: tasks, set: setTask }}>
-        
+
         <popUpContext.Provider
           value={{ state: popUpState, set: setPopUpState }}
         >

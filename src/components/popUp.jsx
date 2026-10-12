@@ -4,7 +4,7 @@ import Delete from "./Delete.jsx";
 
 import { useContext } from "react";
 
-import { popUpContext } from "../contexts/popUp.jsx";
+import { popUpContext } from "../contexts/popUp.js";
 
 export default function PopUp({ operation }) {
   const popUpState = useContext(popUpContext);

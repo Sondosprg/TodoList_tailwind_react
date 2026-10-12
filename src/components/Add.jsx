@@ -1,20 +1,27 @@
-import { useContext } from "react";
-import { tasksContext } from "../contexts/tasks";
+
 import { useState } from "react";
+import { useContext } from "react";
+
+import { tasksContext } from "../contexts/tasks.js";
+import { popUpContext } from "../contexts/popUp.js";
 
 
 export default function Add() {
-  let dataOfTasks = useContext(tasksContext);
-  console.log(dataOfTasks);
+
+  const tasks = useContext(tasksContext);
+  console.log(tasks);
+
+  const popUpState = useContext(popUpContext);
+  console.log(popUpState);
+
   const [valueInput, setValueInput] = useState("");
-  // const [dataOfTasks , setDataOfTasks] = useState(useContext(tasks));
 
   const addTask = (title) => {
+    console.log(title);
     if (title != "") {
-      
-      console.log(dataOfTasks);
-      console.log(dataOfTasks);
-      // setDataOfTasks([...dataOfTasks , {id : Date.now() , title : title} ] ) ;
+       tasks.set([...tasks.value, { id: Date.now(), title: title }]);
+       // close popUp
+       popUpState.set(false);
     }
   };
 

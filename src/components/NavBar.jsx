@@ -4,7 +4,7 @@ import PopUp from "./popUp";
 import { useContext } from "react";
 
 import { tasksContext } from "../contexts/tasks.js";
-import { popUpContext } from "../contexts/popUp.jsx";
+import { popUpContext } from "../contexts/popUp.js";
 
 export default function NavBar() {
   const tasks = useContext(tasksContext);
@@ -13,9 +13,9 @@ export default function NavBar() {
   const popUpState = useContext(popUpContext);
   console.log(popUpState);
 
-  const addTask = () => {
-    tasks.set([...tasks.value, { id: 4, title: "sondos" }]);
-  };
+  // const addTask = () => {
+  //   tasks.set([...tasks.value, { id: 4, title: "sondos" }]);
+  // };
 
 
   return (
@@ -26,7 +26,7 @@ export default function NavBar() {
             {/* add btn */}
             <li
               onClick={() => {
-                addTask();
+                // addTask();
                 popUpState.set(true);
               }}
               className="transition  text-sm font-semibold text-gray-800  rounded-md text-center hover:opacity-90 w-auto p-1   hover:cursor-pointer hover:shadow active:scale-95 bg-primary"
