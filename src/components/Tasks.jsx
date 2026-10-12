@@ -1,7 +1,6 @@
 import Task from "./Task";
 import { tasksContext } from "../contexts/tasks";
 import { useContext } from "react";
-
 import { useState } from "react";
 import PopUp from "./popUp.jsx";
 
@@ -27,7 +26,7 @@ export default function Tasks() {
           }
         }}
       >
-        {contextTasks.map((task) => (
+        {contextTasks.value.map((task) => (
           <Task id={task.id} title={task.title} key={task.id} />
         ))}
       </div>

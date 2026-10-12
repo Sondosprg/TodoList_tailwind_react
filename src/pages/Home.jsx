@@ -1,26 +1,40 @@
+// components
 import Card from "../components/Card.jsx";
 import NavBar from "../components/NavBar.jsx";
+
+// hooks
+import { useState } from "react";
+
+// contexts
 import { tasksContext } from "../contexts/tasks.js";
-// import { useState } from "react";
+import { popUpContext } from "../contexts/popUp.jsx";
 
 export default function Home() {
-  
-
+  // context of tasks
   const DEFAULT_TASKS = [
-      { id: 1, title: "task 01" },
-      { id: 2, title: "task 02" },
-      { id: 3, title: "task 03" },
+    { id: 1, title: "task 01" },
+    { id: 2, title: "task 02" },
+    { id: 3, title: "task 03" },
   ];
+  const [tasks, setTask] = useState(DEFAULT_TASKS);
 
-  // const [tasks , setTask] = useState(tasksContext.data);
+  // context of popUp
+  const [popUpState, setPopUpState] = useState(false);
 
   return (
     <>
-      <tasksContext.Provider value={DEFAULT_TASKS}>
-        <main>
-          <Card />
-        </main>
-        <NavBar />
+      <tasksContext.Provider value={{ value: tasks, set: setTask }}>
+        
+        <popUpContext.Provider
+          value={{ state: popUpState, set: setPopUpState }}
+        >
+          <main>
+            <Card />
+          </main>
+          <NavBar />
+
+        </popUpContext.Provider>
+
       </tasksContext.Provider>
     </>
   );

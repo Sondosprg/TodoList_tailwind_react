@@ -2,7 +2,14 @@ import Add from "./Add.jsx";
 import Edit from "./Edit.jsx";
 import Delete from "./Delete.jsx";
 
+import { useContext } from "react";
+
+import { popUpContext } from "../contexts/popUp.jsx";
+
 export default function PopUp({ operation }) {
+  const popUpState = useContext(popUpContext);
+  console.log(popUpState);
+
   let content = <></>;
   if (operation === "add") {
     content = <Add />;
@@ -14,15 +21,18 @@ export default function PopUp({ operation }) {
 
   return (
     <>
-      <form className="z-300  bg-light rounded-md w-md h-20 text-sm  shadow flex flex-col gap-2 items-center justify-center ">
-        <div className=" w-full ml-2 -mt-4">
-          {/* <button
-             className="text-xl hover:text-primary hover:cursor-pointer transition">
-              &times;
-            </button> */}
-        </div>
-        {content}
-      </form>
+      <div
+        onClick={(e) => {
+          if (e.target.classList.contains("wrapper")) {
+            popUpState.set(false);
+          }
+        }}
+        className="wrapper bg-gray-800/60 z-200 absolute w-full h-full inset-0 flex items-center justify-center "
+      >
+        <form className="z-300  bg-light rounded-md w-md h-25 text-sm  shadow flex flex-col gap-2 items-center justify-center ">
+          {content}
+        </form>
+      </div>
     </>
   );
 }
