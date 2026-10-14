@@ -9,7 +9,7 @@ import { popUpContext } from "../contexts/popUp.js";
 export default function Add() {
 
   const tasks = useContext(tasksContext);
-  console.log(tasks);
+  
 
   const popUpState = useContext(popUpContext);
   console.log(popUpState);
@@ -17,11 +17,11 @@ export default function Add() {
   const [valueInput, setValueInput] = useState("");
 
   const addTask = (title) => {
-    console.log(title);
+   
     if (title != "") {
-       tasks.set([...tasks.value, { id: Date.now(), title: title }]);
+       tasks.set([...tasks.value, { id: Date.now(), title: title , isComplete : false}]);
        // close popUp
-       popUpState.set(false);
+       popUpState.set((prev)=>({...prev , state_: false}))
     }
   };
 

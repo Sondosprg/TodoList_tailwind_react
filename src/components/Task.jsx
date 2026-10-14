@@ -4,7 +4,7 @@ export default function Task({ id, title }) {
   const [isCheck, setCheck] = useState(false);
   return (
     <>
-      <div className="flex justify-between items-center  xs:items-start  hover:bg-primary/10   h-fit transition ">
+      <div data-id={id} className="Task flex justify-between items-center  xs:items-start  hover:bg-primary/10   h-fit transition ">
         {/* <label for={`check-${id}`} className="">
        <input
             id={`check-${id}`}
@@ -18,13 +18,14 @@ export default function Task({ id, title }) {
       </label> */}
 
         {/* <h6 className={isCompleted ?"line-through text-dark" :""}>{title}</h6> */}
-        <h6 className=" row-span-1 w-full h-fit">{title} 
-
-           py-2 py-2 py-2 py-2 py-2 py-2 py-2 py-2 py-2 py-2 py-2 py-2 py-2 py-2 py-2 py-2
+        <h6 className="Title row-span-1 w-full h-fit">
+          {title} 
         </h6>
 
         <ul class="flex items-center xs:flex-col sm:flex-row h-fit   gap-2  ">
-          <li>
+
+          {/* completed */}
+           <li className="Completed">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -39,7 +40,9 @@ export default function Task({ id, title }) {
             </svg>
           </li>
 
-          <li>
+
+          {/* edit */}
+          <li className="Edit">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -51,7 +54,8 @@ export default function Task({ id, title }) {
             </svg>
           </li>
 
-          <li>
+           {/* delete */}
+          <li className="Delete">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"

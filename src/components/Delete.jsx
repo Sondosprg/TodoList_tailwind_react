@@ -1,9 +1,14 @@
+import PopUp from "./popUp";
+
+
 import { useContext } from "react";
-import { tasksContext } from "../contexts/tasks";
+
+import { tasksContext } from "../contexts/tasks.js";
+import { popUpContext } from "../contexts/popUp.js";
 
 export default function Delete() {
   const dataOfTasks = useContext(tasksContext);
-  console.log(dataOfTasks);
+  console.log('popUp delete');
 
   return (
     <>

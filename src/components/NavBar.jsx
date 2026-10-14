@@ -1,6 +1,5 @@
 import PopUp from "./popUp";
 
-
 import { useContext } from "react";
 
 import { tasksContext } from "../contexts/tasks.js";
@@ -8,15 +7,13 @@ import { popUpContext } from "../contexts/popUp.js";
 
 export default function NavBar() {
   const tasks = useContext(tasksContext);
-  console.log(tasks);
 
   const popUpState = useContext(popUpContext);
-  console.log(popUpState);
 
+  console.log("navbar" ,popUpState.state_ );
   // const addTask = () => {
   //   tasks.set([...tasks.value, { id: 4, title: "sondos" }]);
   // };
-
 
   return (
     <>
@@ -27,7 +24,11 @@ export default function NavBar() {
             <li
               onClick={() => {
                 // addTask();
-                popUpState.set(true);
+                popUpState.set((prev) => ({
+                  ...prev,
+                  state_: true,
+                  type: "add",
+                }));
               }}
               className="transition  text-sm font-semibold text-gray-800  rounded-md text-center hover:opacity-90 w-auto p-1   hover:cursor-pointer hover:shadow active:scale-95 bg-primary"
             >
@@ -58,7 +59,11 @@ export default function NavBar() {
         </nav>
       </header>
 
-      {popUpState.state ? <PopUp operation={"add"} /> : <></>}
+      {popUpState.state_ && popUpState.type == "add" ? (
+        <PopUp operation={"add"} />
+      ) : (
+        <></>
+      )}
     </>
   );
 }

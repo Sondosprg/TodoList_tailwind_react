@@ -1,29 +1,43 @@
 import Task from "./Task";
-import { tasksContext } from "../contexts/tasks";
-import { useContext } from "react";
-import { useState } from "react";
 import PopUp from "./popUp.jsx";
 
+import { useState } from "react";
+import { useContext } from "react";
+
+import { tasksContext } from "../contexts/tasks";
+import { popUpContext } from "../contexts/popUp.js";
 
 export default function Tasks() {
   const contextTasks = useContext(tasksContext);
-  console.log("Card.jsx");
-  console.log("contextTasks : ", contextTasks);
 
-  const [isOpenMenu, setOpenMenu] = useState(false);
-  const [isOpenPopUp, setOpenPopUp] = useState(false);
+  // const [isOpenMenu, setOpenMenu] = useState(false);
+  // const [isOpenPopUp, setOpenPopUp] = useState(false);
+  // const [operation, setOperation] = useState("");
+
+  const popUpState = useContext(popUpContext);
+  console.log(popUpState);
+
   const [operation, setOperation] = useState("");
 
+  const handleTasks = (e) => {
+    //  console.log(e.target.closest(".Completed"));
+    if (e.target.closest(".Delete")) {
+      console.log("class Delete clicked");
+      setOperation("delete");
+      popUpState.set((prev) => ({ ...prev, state_: true, type: "delete" }));
+    }
+  };
 
   return (
     <>
       <div
         className="relative  px-4  overflow-y-scroll flex flex-col gap-2 h-70 scrollbar-none cursor-pointer"
         onClick={(e) => {
-          if (e.target.classList.contains("checkbox-task")) {
-            console.log("===========OPEN=============");
-            setOpenMenu(!isOpenMenu);
-          }
+          handleTasks(e);
+          // if (e.target.classList.contains("checkbox-task")) {
+          //   console.log("===========OPEN=============");
+          //   setOpenMenu(!isOpenMenu);
+          // }
         }}
       >
         {contextTasks.value.map((task) => (
@@ -31,7 +45,7 @@ export default function Tasks() {
         ))}
       </div>
 
-      <div
+      {/* <div
         className={
           isOpenMenu
             ? " bg-accent absolute w-100 h-50  rounded-t-md transition shadow z-100"
@@ -40,7 +54,6 @@ export default function Tasks() {
       >
            <div class="size-6 cursor-pointer rounded-full flex items-center justify-center m-2 bg-primary text-center">
                 <span class="align-middle inline-block">x</span>
-                {/* <span class="inline-block align-middle">The quick brown fox...</span> */}
 
             </div>
         <ul className="flex flex-col items-center justify-center gap-2 w-full h-full">
@@ -77,9 +90,11 @@ export default function Tasks() {
           </li>
           
         </ul>
-      </div>
+      </div> */}
 
-      {isOpenPopUp ? (
+      {popUpState.state_ ? <PopUp operation={operation} /> : <></>}
+
+      {/* {isOpenPopUp ? (
         <div
           onClick={(e) => {
             if (e.target.classList.contains("wrapper")) {
@@ -92,7 +107,7 @@ export default function Tasks() {
         </div>
       ) : (
         <></>
-      )}
+      )} */}
     </>
   );
 }
