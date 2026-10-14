@@ -10,10 +10,12 @@ export default function NavBar() {
 
   const popUpState = useContext(popUpContext);
 
-  console.log("navbar" ,popUpState.state_ );
+  console.log("navbar", popUpState);
   // const addTask = () => {
   //   tasks.set([...tasks.value, { id: 4, title: "sondos" }]);
   // };
+
+
 
   return (
     <>
@@ -24,11 +26,11 @@ export default function NavBar() {
             <li
               onClick={() => {
                 // addTask();
-                popUpState.set((prev) => ({
-                  ...prev,
-                  state_: true,
+                popUpState.set({
+                  ...popUpState,
+                  state: true,
                   type: "add",
-                }));
+                });
               }}
               className="transition  text-sm font-semibold text-gray-800  rounded-md text-center hover:opacity-90 w-auto p-1   hover:cursor-pointer hover:shadow active:scale-95 bg-primary"
             >
@@ -58,8 +60,8 @@ export default function NavBar() {
           </ul>
         </nav>
       </header>
-
-      {popUpState.state_ && popUpState.type == "add" ? (
+   
+      {popUpState.state && popUpState.type == "add" ? (
         <PopUp operation={"add"} />
       ) : (
         <></>

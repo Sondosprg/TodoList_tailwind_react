@@ -28,12 +28,15 @@ export default function PopUp({ operation }) {
       <div
         onClick={(e) => {
           if (e.target.classList.contains("wrapper")) {
-            popUpState.set((prev)=>({...prev , state_: false}))
+            console.log("wrapper");
+            popUpState.set({...popUpState , state: false})
           }
         }}
         className="wrapper bg-gray-800/60 z-200 absolute w-full h-full inset-0 flex items-center justify-center "
       >
-        <form className="z-300  bg-light rounded-md w-md h-25 text-sm  shadow flex flex-col gap-2 items-center justify-center ">
+        <form 
+        onSubmit={(e)=> e.preventDefault()}
+        className="z-300  bg-light rounded-md w-md h-25 text-sm  shadow flex flex-col gap-2 items-center justify-center ">
           {
             operation == "add"?
             <Add /> :

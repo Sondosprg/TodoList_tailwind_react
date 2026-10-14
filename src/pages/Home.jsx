@@ -8,6 +8,7 @@ import { useState } from "react";
 // contexts
 import { tasksContext } from "../contexts/tasks.js";
 import { popUpContext } from "../contexts/popUp.js";
+import { idContext } from "../contexts/id.js";
 
 export default function Home() {
   // context of tasks
@@ -19,19 +20,31 @@ export default function Home() {
   const [tasks, setTask] = useState(DEFAULT_TASKS);
 
   // context of popUp
-  const [popUpState, setPopUpState] = useState(false);
+  const [popUpState, setPopUpState] = useState({ state: false, type: "" });
 
   return (
     <>
       <tasksContext.Provider value={{ value: tasks, set: setTask }}>
+
         <popUpContext.Provider
-          value={{ state: popUpState, set: setPopUpState }}
+          value={{
+            state: popUpState.state,
+            type: popUpState.type,
+            set: setPopUpState,
+          }}
         >
-          <main>
-            <Card />
-          </main>
-          <NavBar />
+
+          <idContext.Provider value = {''}>
+
+            <main>
+              <Card />
+            </main>
+            <NavBar />
+
+          </idContext.Provider>
+
         </popUpContext.Provider>
+
       </tasksContext.Provider>
     </>
   );

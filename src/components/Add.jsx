@@ -21,7 +21,7 @@ export default function Add() {
     if (title != "") {
        tasks.set([...tasks.value, { id: Date.now(), title: title , isComplete : false}]);
        // close popUp
-       popUpState.set((prev)=>({...prev , state_: false}))
+       popUpState.set({...popUpState , state: false})
     }
   };
 

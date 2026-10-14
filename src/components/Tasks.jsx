@@ -1,13 +1,16 @@
 import Task from "./Task";
 import PopUp from "./popUp.jsx";
 
-import { useState } from "react";
+import { use, useState } from "react";
 import { useContext } from "react";
 
 import { tasksContext } from "../contexts/tasks";
 import { popUpContext } from "../contexts/popUp.js";
+import { idContext } from "../contexts/id.js";
 
 export default function Tasks() {
+  console.log("tasks");
+  const ALL_OPERATIONS = ["edit", "delete"];
   const contextTasks = useContext(tasksContext);
 
   // const [isOpenMenu, setOpenMenu] = useState(false);
@@ -17,16 +20,23 @@ export default function Tasks() {
   const popUpState = useContext(popUpContext);
   console.log(popUpState);
 
+  let contextId = useContext(idContext);
+
   const [operation, setOperation] = useState("");
 
   const handleTasks = (e) => {
     //  console.log(e.target.closest(".Completed"));
     if (e.target.closest(".Delete")) {
+      console.log("# contextId", contextId);
+      
+      console.log("ID ===>", e.target.closest(".Task").dataset.id);
       console.log("class Delete clicked");
       setOperation("delete");
-      popUpState.set((prev) => ({ ...prev, state_: true, type: "delete" }));
+      popUpState.set({ ...popUpState, state: true, type: "delete" });
     }
   };
+
+  console.log(ALL_OPERATIONS.includes(popUpState.type), popUpState);
 
   return (
     <>
@@ -45,69 +55,11 @@ export default function Tasks() {
         ))}
       </div>
 
-      {/* <div
-        className={
-          isOpenMenu
-            ? " bg-accent absolute w-100 h-50  rounded-t-md transition shadow z-100"
-            : "hidden"
-        }
-      >
-           <div class="size-6 cursor-pointer rounded-full flex items-center justify-center m-2 bg-primary text-center">
-                <span class="align-middle inline-block">x</span>
-
-            </div>
-        <ul className="flex flex-col items-center justify-center gap-2 w-full h-full">
-         
-          <li
-            className="hover:bg-primary w-auto px-2 hover:cursor-pointer text-center transition rounded-md active:scale-95"
-            onClick={() => {
-              setOpenMenu(false);
-              setOpenPopUp(true);
-              setOperation("add");
-            }}
-          >
-            add
-          </li>
-          <li
-            className="hover:bg-primary w-auto px-2 hover:cursor-pointer text-center transition rounded-md active:scale-95"
-            onClick={() => {
-              setOpenMenu(false);
-             setOpenPopUp(true);
-              setOperation("edit");
-            }}
-          >
-            edit
-          </li>
-          <li
-            className="hover:bg-primary w-auto px-2 hover:cursor-pointer text-center transition rounded-md active:scale-95"
-            onClick={() => {
-              setOpenMenu(false);
-              setOpenPopUp(true);
-              setOperation("delete");
-            }}
-          >
-            delete
-          </li>
-          
-        </ul>
-      </div> */}
-
-      {popUpState.state_ ? <PopUp operation={operation} /> : <></>}
-
-      {/* {isOpenPopUp ? (
-        <div
-          onClick={(e) => {
-            if (e.target.classList.contains("wrapper")) {
-              setOpenPopUp(false);
-            }
-          }}
-          className="wrapper bg-gray-800/60 z-200 absolute w-full h-full inset-0 flex items-center justify-center "
-        >
-          <PopUp operation={operation} />
-        </div>
+      {popUpState.state && ALL_OPERATIONS.includes(popUpState.type) ? (
+        <PopUp operation={operation} />
       ) : (
         <></>
-      )} */}
+      )}
     </>
   );
 }
