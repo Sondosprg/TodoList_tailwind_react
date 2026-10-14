@@ -20,19 +20,23 @@ export default function Tasks() {
   const popUpState = useContext(popUpContext);
   console.log(popUpState);
 
-  let contextId = useContext(idContext);
+  let idC = useContext(idContext);
 
   const [operation, setOperation] = useState("");
+
+  const updateId= (id)=>{
+    console.log(id);
+    idC.current = id;
+    console.log(  idC);
+  }
 
   const handleTasks = (e) => {
     //  console.log(e.target.closest(".Completed"));
     if (e.target.closest(".Delete")) {
-      console.log("# contextId", contextId);
-      
-      console.log("ID ===>", e.target.closest(".Task").dataset.id);
-      console.log("class Delete clicked");
+      updateId(+e.target.closest(".Task").dataset.id);
       setOperation("delete");
       popUpState.set({ ...popUpState, state: true, type: "delete" });
+      
     }
   };
 

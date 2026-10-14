@@ -4,6 +4,7 @@ import NavBar from "../components/NavBar.jsx";
 
 // hooks
 import { useState } from "react";
+import { useRef } from "react";
 
 // contexts
 import { tasksContext } from "../contexts/tasks.js";
@@ -22,6 +23,8 @@ export default function Home() {
   // context of popUp
   const [popUpState, setPopUpState] = useState({ state: false, type: "" });
 
+  const idTask = useRef('');
+
   return (
     <>
       <tasksContext.Provider value={{ value: tasks, set: setTask }}>
@@ -34,7 +37,7 @@ export default function Home() {
           }}
         >
 
-          <idContext.Provider value = {''}>
+          <idContext.Provider value = {idTask}>
 
             <main>
               <Card />

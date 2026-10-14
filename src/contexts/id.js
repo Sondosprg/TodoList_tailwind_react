@@ -1,5 +1,5 @@
 import { createContext } from "react";
 
-export const idContext = createContext("");
+export let idContext = createContext("");
 
 
