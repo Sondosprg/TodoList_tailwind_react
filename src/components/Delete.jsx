@@ -17,6 +17,9 @@ export default function Delete() {
 
   const deleteTask = () => {
     console.log("# contextId", idC);
+    const taskUpdated = tasks.value.filter(task => task.id!=idC.current)
+    tasks.set([...taskUpdated]);
+    popUpState.set({...popUpState , state:false})
   };
 
   return (
