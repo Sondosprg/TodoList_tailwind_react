@@ -6,6 +6,7 @@ import {  useState , useContext } from "react";
 import { tasksContext } from "../contexts/tasks";
 import { popUpContext } from "../contexts/popUp.js";
 import { taskContext } from "../contexts/task.js";
+import { getIndex} from "../utils/array.js";
 
 export default function Tasks() {
   console.log("tasks");
@@ -63,6 +64,18 @@ export default function Tasks() {
       console.log('task info ' , taskInfo);
     }
 
+    if (e.target.closest('.Completed')){
+      console.log("Completed");
+      updateId(id);
+      updateTitle(id);
+      updateComplete(id);
+      const targetIndex = getIndex(tasks , id); // EXCEPTION : can become -1
+      const updatedTasks = tasks.value.toSpliced(targetIndex , 1 , {...taskInfo.current , isComplete :!taskInfo.current.isComplete});
+      console.log(updatedTasks);
+      tasks.set([...updatedTasks]);
+      // console.log("REVERSE" , !taskInfo.current.isComplete);
+    }
+
   };
 
   console.log(ALL_OPERATIONS.includes(popUpState.type), popUpState);
@@ -73,14 +86,10 @@ export default function Tasks() {
         className="relative  px-4  overflow-y-scroll flex flex-col gap-2 h-70 scrollbar-none cursor-pointer"
         onClick={(e) => {
           handleTasks(e);
-          // if (e.target.classList.contains("checkbox-task")) {
-          //   console.log("===========OPEN=============");
-          //   setOpenMenu(!isOpenMenu);
-          // }
         }}
       >
         {tasks.value.map((task) => (
-          <Task id={task.id} title={task.title} key={task.id} />
+          <Task id={task.id} title={task.title} key={task.id} isCompleted={task.isComplete} />
         ))}
       </div>
 

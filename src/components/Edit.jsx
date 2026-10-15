@@ -3,6 +3,7 @@ import { useContext , useState } from "react";
 import { tasksContext } from "../contexts/tasks.js";
 import { popUpContext } from "../contexts/popUp.js";
 import { taskContext } from "../contexts/task.js";
+import {getIndex} from "../utils/array.js";
 
 export default function Edit() {
   const tasks = useContext(tasksContext);
@@ -12,10 +13,10 @@ export default function Edit() {
 
   const [taskValue, setTaskValue] = useState(taskInfo.current.title);
 
-  const getIndex =(id)=>{
-     const index = tasks.value.findIndex(task => task.id === id);
-     return index ;
-  };
+  // const getIndex =(id)=>{
+  //    const index = tasks.value.findIndex(task => task.id === id);
+  //    return index ;
+  // };
 
   const editTask = () => {
     if(taskValue==""){
@@ -23,7 +24,7 @@ export default function Edit() {
     }
     console.log("edit");
     const id = taskInfo.current.id; 
-    const targetIndex = getIndex(id); // EXCEPTION : can become -1
+    const targetIndex = getIndex(tasks , id); // EXCEPTION : can become -1
     const updatedTasks = tasks.value.toSpliced(targetIndex , 1 , {...taskInfo.current , title :taskValue })
     console.log(updatedTasks);
     popUpState.set({...popUpState , state:false});
