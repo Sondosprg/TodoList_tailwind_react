@@ -9,7 +9,7 @@ import { useRef } from "react";
 // contexts
 import { tasksContext } from "../contexts/tasks.js";
 import { popUpContext } from "../contexts/popUp.js";
-import { idContext } from "../contexts/id.js";
+import { taskContext } from "../contexts/task.js";
 
 export default function Home() {
   // context of tasks
@@ -23,12 +23,11 @@ export default function Home() {
   // context of popUp
   const [popUpState, setPopUpState] = useState({ state: false, type: "" });
 
-  const idTask = useRef('');
+  const task = useRef({ id: "", title: "", isComplete: false });
 
   return (
     <>
       <tasksContext.Provider value={{ value: tasks, set: setTask }}>
-
         <popUpContext.Provider
           value={{
             state: popUpState.state,
@@ -36,18 +35,13 @@ export default function Home() {
             set: setPopUpState,
           }}
         >
-
-          <idContext.Provider value = {idTask}>
-
+          <taskContext.Provider value={task}>
             <main>
               <Card />
             </main>
             <NavBar />
-
-          </idContext.Provider>
-
+          </taskContext.Provider>
         </popUpContext.Provider>
-
       </tasksContext.Provider>
     </>
   );

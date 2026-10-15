@@ -1,17 +1,16 @@
 import Task from "./Task";
 import PopUp from "./popUp.jsx";
 
-import { use, useState } from "react";
-import { useContext } from "react";
+import {  useState , useContext } from "react";
 
 import { tasksContext } from "../contexts/tasks";
 import { popUpContext } from "../contexts/popUp.js";
-import { idContext } from "../contexts/id.js";
+import { taskContext } from "../contexts/task.js";
 
 export default function Tasks() {
   console.log("tasks");
   const ALL_OPERATIONS = ["edit", "delete"];
-  const contextTasks = useContext(tasksContext);
+  const tasks = useContext(tasksContext);
 
   // const [isOpenMenu, setOpenMenu] = useState(false);
   // const [isOpenPopUp, setOpenPopUp] = useState(false);
@@ -20,24 +19,50 @@ export default function Tasks() {
   const popUpState = useContext(popUpContext);
   console.log(popUpState);
 
-  let idC = useContext(idContext);
+  let taskInfo = useContext(taskContext);
 
   const [operation, setOperation] = useState("");
 
-  const updateId= (id)=>{
+  const updateId = (id) => {
     console.log(id);
-    idC.current = id;
-    console.log(  idC);
+    taskInfo.current.id = id;
+    console.log(taskInfo);
+  };
+
+  const getTask =(id)=>{
+      const task = tasks.value.find(task => task.id === id);
+      return task; 
+  }
+
+  const updateTitle = (id)=>{
+    const task = getTask(id);
+    taskInfo.current.title = task.title;
+  }
+  const updateComplete=(id)=>{
+    const task = getTask(id);
+    taskInfo.current.isComplete = task.isComplete;
   }
 
   const handleTasks = (e) => {
     //  console.log(e.target.closest(".Completed"));
+    const id = +e.target.closest(".Task").dataset.id;
+
     if (e.target.closest(".Delete")) {
-      updateId(+e.target.closest(".Task").dataset.id);
+      updateId(id);
       setOperation("delete");
       popUpState.set({ ...popUpState, state: true, type: "delete" });
-      
     }
+
+    if (e.target.closest(".Edit")) {
+      updateId(id);
+      updateTitle(id);
+      updateComplete(id);
+      
+      setOperation("edit");
+      popUpState.set({ ...popUpState, state: true, type: "edit" });
+      console.log('task info ' , taskInfo);
+    }
+
   };
 
   console.log(ALL_OPERATIONS.includes(popUpState.type), popUpState);
@@ -54,7 +79,7 @@ export default function Tasks() {
           // }
         }}
       >
-        {contextTasks.value.map((task) => (
+        {tasks.value.map((task) => (
           <Task id={task.id} title={task.title} key={task.id} />
         ))}
       </div>

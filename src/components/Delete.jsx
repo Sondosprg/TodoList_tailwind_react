@@ -4,7 +4,7 @@ import { useContext } from "react";
 
 import { tasksContext } from "../contexts/tasks.js";
 import { popUpContext } from "../contexts/popUp.js";
-import { idContext } from "../contexts/id.js";
+import { taskContext } from "../contexts/task.js";
 
 export default function Delete() {
   // const dataOfTasks = useContext(tasksContext);
@@ -13,13 +13,13 @@ export default function Delete() {
   const tasks = useContext(tasksContext);
   const popUpState = useContext(popUpContext);
 
-  const idC = useContext(idContext);
+  const taskInfo = useContext(taskContext);
 
   const deleteTask = () => {
-    console.log("# contextId", idC);
-    const taskUpdated = tasks.value.filter(task => task.id!=idC.current)
+    console.log("# contextId", taskInfo);
+    const taskUpdated = tasks.value.filter((task) => task.id != taskInfo.current.id);
     tasks.set([...taskUpdated]);
-    popUpState.set({...popUpState , state:false})
+    popUpState.set({ ...popUpState, state: false });
   };
 
   return (
