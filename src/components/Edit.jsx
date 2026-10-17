@@ -6,7 +6,7 @@ import { taskContext } from "../contexts/task.js";
 import {getIndex} from "../utils/array.js";
 
 export default function Edit() {
-  const tasks = useContext(tasksContext);
+  const tasksContx = useContext(tasksContext);
   const popUpState = useContext(popUpContext);
 
   const taskInfo = useContext(taskContext);
@@ -24,11 +24,12 @@ export default function Edit() {
     }
     console.log("edit");
     const id = taskInfo.current.id; 
-    const targetIndex = getIndex(tasks , id); // EXCEPTION : can become -1
-    const updatedTasks = tasks.value.toSpliced(targetIndex , 1 , {...taskInfo.current , title :taskValue })
+    const targetIndex = getIndex(tasksContx , id); // EXCEPTION : can become -1
+    const updatedTasks = tasksContx.value.toSpliced(targetIndex , 1 , {...taskInfo.current , title :taskValue })
     console.log(updatedTasks);
     popUpState.set({...popUpState , state:false});
-    tasks.set([...updatedTasks]);
+    tasksContx.set([...updatedTasks]);
+    tasksContx.setCurrent([...updatedTasks]);
   };
 
   return (

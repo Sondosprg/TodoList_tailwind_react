@@ -3,7 +3,7 @@ import PopUp from "./popUp.jsx";
 
 import {  useState , useContext } from "react";
 
-import { tasksContext } from "../contexts/tasks";
+import { tasksContext } from "../contexts/tasks.js";
 import { popUpContext } from "../contexts/popUp.js";
 import { taskContext } from "../contexts/task.js";
 import { getIndex} from "../utils/array.js";
@@ -11,7 +11,7 @@ import { getIndex} from "../utils/array.js";
 export default function Tasks() {
   console.log("tasks");
   const ALL_OPERATIONS = ["edit", "delete"];
-  const tasks = useContext(tasksContext);
+  const tasksContx = useContext(tasksContext);
 
   // const [isOpenMenu, setOpenMenu] = useState(false);
   // const [isOpenPopUp, setOpenPopUp] = useState(false);
@@ -31,7 +31,7 @@ export default function Tasks() {
   };
 
   const getTask =(id)=>{
-      const task = tasks.value.find(task => task.id === id);
+      const task = tasksContx.value.find(task => task.id === id);
       return task; 
   }
 
@@ -46,14 +46,17 @@ export default function Tasks() {
 
   const handleTasks = (e) => {
     //  console.log(e.target.closest(".Completed"));
+    if(e.target.closest(".Task")){
+
     const id = +e.target.closest(".Task").dataset.id;
 
     if (e.target.closest(".Delete")) {
       updateId(id);
       setOperation("delete");
       popUpState.set({ ...popUpState, state: true, type: "delete" });
-    }
+    };
 
+    
     if (e.target.closest(".Edit")) {
       updateId(id);
       updateTitle(id);
@@ -62,23 +65,31 @@ export default function Tasks() {
       setOperation("edit");
       popUpState.set({ ...popUpState, state: true, type: "edit" });
       console.log('task info ' , taskInfo);
-    }
+    };
 
+    // case specific
     if (e.target.closest('.Completed')){
       console.log("Completed");
       updateId(id);
       updateTitle(id);
       updateComplete(id);
-      const targetIndex = getIndex(tasks , id); // EXCEPTION : can become -1
-      const updatedTasks = tasks.value.toSpliced(targetIndex , 1 , {...taskInfo.current , isComplete :!taskInfo.current.isComplete});
+      const targetIndex = getIndex(tasksContx.value , id); // EXCEPTION : can become -1
+      const updatedTasks = tasksContx.value.toSpliced(targetIndex , 1 , {...taskInfo.current , isComplete :!taskInfo.current.isComplete});
       console.log(updatedTasks);
-      tasks.set([...updatedTasks]);
+
+      tasksContx.set([...updatedTasks]);
+      tasksContx.setCurrent([...updatedTasks]);
       // console.log("REVERSE" , !taskInfo.current.isComplete);
-    }
+    };
+
+    };
+    
+
+
 
   };
 
-  console.log(ALL_OPERATIONS.includes(popUpState.type), popUpState);
+  console.log(" ==============rerender task ========= \n " , tasksContx.currentValue);
 
   return (
     <>
@@ -88,7 +99,7 @@ export default function Tasks() {
           handleTasks(e);
         }}
       >
-        {tasks.value.map((task) => (
+        {tasksContx.currentValue.map((task) => (
           <Task id={task.id} title={task.title} key={task.id} isCompleted={task.isComplete} />
         ))}
       </div>

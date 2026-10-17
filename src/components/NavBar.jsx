@@ -6,7 +6,7 @@ import { tasksContext } from "../contexts/tasks.js";
 import { popUpContext } from "../contexts/popUp.js";
 
 export default function NavBar() {
-  const tasks = useContext(tasksContext);
+  const tasksContx = useContext(tasksContext);
 
   const popUpState = useContext(popUpContext);
 
@@ -14,6 +14,29 @@ export default function NavBar() {
   // const addTask = () => {
   //   tasks.set([...tasks.value, { id: 4, title: "sondos" }]);
   // };
+
+
+  const showAllTasks = ()=>{
+    console.log("ALL");
+    tasksContx.setState("all");
+    const allTasks = [...tasksContx.value];
+    tasksContx.setCurrent([...allTasks]);
+  };
+
+  const showCompletedTasks = ()=>{
+    tasksContx.setState("completed");
+    console.log("COMPLETED");
+    const completedTasks = tasksContx.value.filter(taskC => taskC.isComplete === true);
+    tasksContx.setCurrent([...completedTasks]);
+  };
+
+
+  const showNoCompletedTasks = ()=>{
+    tasksContx.setState("no_completed");
+    console.log("NO COMPLETED");
+    const noCompletedTasks = tasksContx.value.filter(taskC => taskC.isComplete === false);
+    tasksContx.setCurrent([...noCompletedTasks]);
+  };
 
 
 
@@ -48,13 +71,19 @@ export default function NavBar() {
               </svg>
             </li>
 
-            <li className="transition  text-sm font-semibold text-gray-800  rounded-md text-center hover:bg-primary w-auto p-1   hover:cursor-pointer hover:shadow active:scale-95">
+            <li
+            onClick={showAllTasks} 
+            className="transition  text-sm font-semibold text-gray-800  rounded-md text-center hover:bg-primary w-auto p-1   hover:cursor-pointer hover:shadow active:scale-95">
               all
             </li>
-            <li className="transition  text-sm font-semibold text-gray-800 rounded-md text-center hover:bg-primary w-auto p-1  hover:cursor-pointer hover:shadow active:scale-95">
+            <li 
+             onClick={showCompletedTasks} 
+            className="transition  text-sm font-semibold text-gray-800 rounded-md text-center hover:bg-primary w-auto p-1  hover:cursor-pointer hover:shadow active:scale-95">
               completed
             </li>
-            <li className="transition text-sm font-semibold text-gray-800 rounded-md text-center hover:bg-primary w-auto p-1  hover:cursor-pointer hover:shadow active:scale-95">
+            <li 
+             onClick={showNoCompletedTasks} 
+            className="transition text-sm font-semibold text-gray-800 rounded-md text-center hover:bg-primary w-auto p-1  hover:cursor-pointer hover:shadow active:scale-95">
               no completed
             </li>
           </ul>

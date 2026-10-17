@@ -10,15 +10,16 @@ export default function Delete() {
   // const dataOfTasks = useContext(tasksContext);
   // console.log('popUp delete');
 
-  const tasks = useContext(tasksContext);
+  const tasksContx = useContext(tasksContext);
   const popUpState = useContext(popUpContext);
 
   const taskInfo = useContext(taskContext);
 
   const deleteTask = () => {
     console.log("# contextId", taskInfo);
-    const taskUpdated = tasks.value.filter((task) => task.id != taskInfo.current.id);
-    tasks.set([...taskUpdated]);
+    const taskUpdated = tasksContx.value.filter((task) => task.id != taskInfo.current.id);
+    tasksContx.set([...taskUpdated]);
+    tasksContx.setCurrent([...taskUpdated]);
     popUpState.set({ ...popUpState, state: false });
   };
 
