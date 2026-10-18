@@ -1,5 +1,3 @@
-import PopUp from "./popUp";
-
 import { useContext } from "react";
 
 import { tasksContext } from "../contexts/tasks.js";
@@ -7,19 +5,25 @@ import { popUpContext } from "../contexts/popUp.js";
 import { taskContext } from "../contexts/task.js";
 
 export default function Delete() {
-  // const dataOfTasks = useContext(tasksContext);
-  // console.log('popUp delete');
-
   const tasksContx = useContext(tasksContext);
   const popUpState = useContext(popUpContext);
 
   const taskInfo = useContext(taskContext);
 
   const deleteTask = () => {
+    console.log("delete");
     console.log("# contextId", taskInfo);
-    const taskUpdated = tasksContx.value.filter((task) => task.id != taskInfo.current.id);
-    tasksContx.set([...taskUpdated]);
-    tasksContx.setCurrent([...taskUpdated]);
+
+    const updatedTasks = tasksContx.value.filter(
+      (task) => task.id != taskInfo.current.id,
+    );
+    const updatedCurrentTasks = tasksContx.currentValue.filter(
+      (task) => task.id != taskInfo.current.id,
+    );
+
+    tasksContx.set([...updatedTasks]);
+    tasksContx.setCurrent([...updatedCurrentTasks]);
+
     popUpState.set({ ...popUpState, state: false });
   };
 
@@ -31,12 +35,6 @@ export default function Delete() {
           delete
         </button>
       </div>
-      {/* 
-      {popUpState.state_ && popUpState.type == "delete" ? (
-              <PopUp operation={"delete"} />
-            ) : (
-              <></>
-      )} */}
     </>
   );
 }

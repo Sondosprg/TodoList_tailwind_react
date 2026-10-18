@@ -15,30 +15,30 @@ export default function NavBar() {
   //   tasks.set([...tasks.value, { id: 4, title: "sondos" }]);
   // };
 
-
-  const showAllTasks = ()=>{
+  const showAllTasks = () => {
     console.log("ALL");
     tasksContx.setState("all");
     const allTasks = [...tasksContx.value];
     tasksContx.setCurrent([...allTasks]);
   };
 
-  const showCompletedTasks = ()=>{
+  const showCompletedTasks = () => {
     tasksContx.setState("completed");
     console.log("COMPLETED");
-    const completedTasks = tasksContx.value.filter(taskC => taskC.isComplete === true);
+    const completedTasks = tasksContx.value.filter(
+      (taskC) => taskC.isComplete === true,
+    );
     tasksContx.setCurrent([...completedTasks]);
   };
 
-
-  const showNoCompletedTasks = ()=>{
+  const showNoCompletedTasks = () => {
     tasksContx.setState("no_completed");
     console.log("NO COMPLETED");
-    const noCompletedTasks = tasksContx.value.filter(taskC => taskC.isComplete === false);
+    const noCompletedTasks = tasksContx.value.filter(
+      (taskC) => taskC.isComplete === false,
+    );
     tasksContx.setCurrent([...noCompletedTasks]);
   };
-
-
 
   return (
     <>
@@ -72,24 +72,27 @@ export default function NavBar() {
             </li>
 
             <li
-            onClick={showAllTasks} 
-            className="transition  text-sm font-semibold text-gray-800  rounded-md text-center hover:bg-primary w-auto p-1   hover:cursor-pointer hover:shadow active:scale-95">
+              onClick={showAllTasks}
+              className="transition  text-sm font-semibold text-gray-800  rounded-md text-center hover:bg-primary w-auto p-1   hover:cursor-pointer hover:shadow active:scale-95"
+            >
               all
             </li>
-            <li 
-             onClick={showCompletedTasks} 
-            className="transition  text-sm font-semibold text-gray-800 rounded-md text-center hover:bg-primary w-auto p-1  hover:cursor-pointer hover:shadow active:scale-95">
+            <li
+              onClick={showCompletedTasks}
+              className="transition  text-sm font-semibold text-gray-800 rounded-md text-center hover:bg-primary w-auto p-1  hover:cursor-pointer hover:shadow active:scale-95"
+            >
               completed
             </li>
-            <li 
-             onClick={showNoCompletedTasks} 
-            className="transition text-sm font-semibold text-gray-800 rounded-md text-center hover:bg-primary w-auto p-1  hover:cursor-pointer hover:shadow active:scale-95">
-              no completed
+            <li
+              onClick={showNoCompletedTasks}
+              className="transition text-sm font-semibold text-gray-800 rounded-md text-center hover:bg-primary w-auto p-1  hover:cursor-pointer hover:shadow active:scale-95"
+            >
+              pending
             </li>
           </ul>
         </nav>
       </header>
-   
+
       {popUpState.state && popUpState.type == "add" ? (
         <PopUp operation={"add"} />
       ) : (

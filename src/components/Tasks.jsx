@@ -67,18 +67,24 @@ export default function Tasks() {
       console.log('task info ' , taskInfo);
     };
 
-    // case specific
+    // case specific (make as completed tasks)
     if (e.target.closest('.Completed')){
       console.log("Completed");
       updateId(id);
       updateTitle(id);
       updateComplete(id);
+
+      // todo : fix 
       const targetIndex = getIndex(tasksContx.value , id); // EXCEPTION : can become -1
+      const targetCurrentIndex = getIndex(tasksContx.currentValue , id); // EXCEPTION : can become -1
+
       const updatedTasks = tasksContx.value.toSpliced(targetIndex , 1 , {...taskInfo.current , isComplete :!taskInfo.current.isComplete});
+      const updatedCurrentTasks = tasksContx.currentValue.toSpliced(targetCurrentIndex , 1 , {...taskInfo.current , isComplete :!taskInfo.current.isComplete});
+
       console.log(updatedTasks);
 
       tasksContx.set([...updatedTasks]);
-      tasksContx.setCurrent([...updatedTasks]);
+      tasksContx.setCurrent([...updatedCurrentTasks]);
       // console.log("REVERSE" , !taskInfo.current.isComplete);
     };
 

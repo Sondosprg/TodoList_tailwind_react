@@ -1,9 +1,9 @@
-import { useContext , useState } from "react";
+import { useContext, useState } from "react";
 
 import { tasksContext } from "../contexts/tasks.js";
 import { popUpContext } from "../contexts/popUp.js";
 import { taskContext } from "../contexts/task.js";
-import {getIndex} from "../utils/array.js";
+import { getIndex } from "../utils/array.js";
 
 export default function Edit() {
   const tasksContx = useContext(tasksContext);
@@ -13,32 +13,39 @@ export default function Edit() {
 
   const [taskValue, setTaskValue] = useState(taskInfo.current.title);
 
-  // const getIndex =(id)=>{
-  //    const index = tasks.value.findIndex(task => task.id === id);
-  //    return index ;
-  // };
-
   const editTask = () => {
-    if(taskValue==""){
+    if (taskValue == "") {
       return;
     }
     console.log("edit");
-    const id = taskInfo.current.id; 
-    const targetIndex = getIndex(tasksContx , id); // EXCEPTION : can become -1
-    const updatedTasks = tasksContx.value.toSpliced(targetIndex , 1 , {...taskInfo.current , title :taskValue })
-    console.log(updatedTasks);
-    popUpState.set({...popUpState , state:false});
+    const id = taskInfo.current.id;
+
+    const targetIndex = getIndex(tasksContx.value, id); // EXCEPTION : can become -1
+    const targetCurrentIndex = getIndex(tasksContx.currentValue, id); // EXCEPTION : can become -1
+
+    const updatedTasks = tasksContx.value.toSpliced(targetIndex, 1, {
+      ...taskInfo.current,
+      title: taskValue,
+    });
+
+    const updatedCurrentTasks = tasksContx.currentValue.toSpliced(
+      targetCurrentIndex,
+      1,
+      { ...taskInfo.current, title: taskValue },
+    );
+
+    popUpState.set({ ...popUpState, state: false });
+
     tasksContx.set([...updatedTasks]);
-    tasksContx.setCurrent([...updatedTasks]);
+    tasksContx.setCurrent([...updatedCurrentTasks]);
   };
 
   return (
     <>
       <div className="space-x-2">
-        {/* todo : infinite renender */}
         <input
           value={taskValue}
-          onChange={(e)=>setTaskValue(e.target.value)}
+          onChange={(e) => setTaskValue(e.target.value)}
           type="text"
           className="border-2 border-dark/20 focus:outline-none focus:ring-primary focus:ring-2 focus:border-transparent rounded-sm p-1"
         />

@@ -21,7 +21,7 @@ export default function Home() {
 
   const [tasks, setTasks] = useState(DEFAULT_TASKS);
   const [currentTasks, setCurrentTasks] = useState(DEFAULT_TASKS);
-  const [state , setState] = useState("all");
+  const [state, setState] = useState("all");
 
   // context of popUp
   const [popUpState, setPopUpState] = useState({ state: false, type: "" });
@@ -30,7 +30,16 @@ export default function Home() {
 
   return (
     <>
-      <tasksContext.Provider value={{ state:state , value: tasks, currentValue :currentTasks ,   set: setTasks  , setCurrent : setCurrentTasks , setState : setState}}>
+      <tasksContext.Provider
+        value={{
+          state: state,
+          value: tasks,
+          currentValue: currentTasks,
+          set: setTasks,
+          setCurrent: setCurrentTasks,
+          setState: setState,
+        }}
+      >
         <popUpContext.Provider
           value={{
             state: popUpState.state,

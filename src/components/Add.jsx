@@ -1,15 +1,11 @@
-
 import { useState } from "react";
 import { useContext } from "react";
 
 import { tasksContext } from "../contexts/tasks.js";
 import { popUpContext } from "../contexts/popUp.js";
 
-
 export default function Add() {
-
   const tasksContx = useContext(tasksContext);
-  
 
   const popUpState = useContext(popUpContext);
   console.log(popUpState);
@@ -17,18 +13,25 @@ export default function Add() {
   const [valueInput, setValueInput] = useState("");
 
   const addTask = (title) => {
-   
-    if(title == ""){
-      return ;
+    if (title == "") {
+      return;
     }
-   
-      tasksContx.set([...tasksContx.value, { id: Date.now(), title: title , isComplete : false}]);
-      tasksContx.setCurrent([...tasksContx.currentValue , { id: Date.now(), title: title , isComplete : false} ]);
-       // close popUp
-       popUpState.set({...popUpState , state: false});
 
-       console.log(tasksContx);
+    let isCurrentComplete = false;
+    if (tasksContx.state == "completed") {
+      isCurrentComplete = true;
+    }
 
+    tasksContx.set([
+      ...tasksContx.value,
+      { id: Date.now(), title: title, isComplete: isCurrentComplete },
+    ]);
+    tasksContx.setCurrent([
+      ...tasksContx.currentValue,
+      { id: Date.now(), title: title, isComplete: isCurrentComplete },
+    ]);
+    // close popUp
+    popUpState.set({ ...popUpState, state: false });
   };
 
   return (
