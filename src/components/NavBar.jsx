@@ -5,40 +5,39 @@ import { useContext } from "react";
 import { tasksContext } from "../contexts/tasks.js";
 import { popUpContext } from "../contexts/popUp.js";
 
+import { getCompletedTasks , getNoCompletedTasks  } from "../utils/array.js";
+
 export default function NavBar() {
   const tasksContx = useContext(tasksContext);
-
   const popUpState = useContext(popUpContext);
 
-  console.log("navbar", popUpState);
-  // const addTask = () => {
-  //   tasks.set([...tasks.value, { id: 4, title: "sondos" }]);
-  // };
+  console.log("navbar");
 
   const showAllTasks = () => {
     console.log("ALL");
+
     tasksContx.setState("all");
     const allTasks = [...tasksContx.value];
     tasksContx.setCurrent([...allTasks]);
   };
 
   const showCompletedTasks = () => {
-    tasksContx.setState("completed");
     console.log("COMPLETED");
-    const completedTasks = tasksContx.value.filter(
-      (taskC) => taskC.isComplete === true,
-    );
+
+    tasksContx.setState("completed");
+    const completedTasks = getCompletedTasks(tasksContx.value);
     tasksContx.setCurrent([...completedTasks]);
   };
 
   const showNoCompletedTasks = () => {
-    tasksContx.setState("no_completed");
     console.log("NO COMPLETED");
-    const noCompletedTasks = tasksContx.value.filter(
-      (taskC) => taskC.isComplete === false,
-    );
+
+    tasksContx.setState("no_completed");
+    const noCompletedTasks = getNoCompletedTasks(tasksContx.value);
     tasksContx.setCurrent([...noCompletedTasks]);
   };
+
+
 
   return (
     <>
