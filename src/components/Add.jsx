@@ -3,12 +3,14 @@ import { useContext } from "react";
 
 import { tasksContext } from "../contexts/tasks.js";
 import { popUpContext } from "../contexts/popUp.js";
+import { progressContext } from "../contexts/progress";
 
 export default function Add() {
   const tasksContx = useContext(tasksContext);
-
   const popUpState = useContext(popUpContext);
-  console.log(popUpState);
+  const progressContx = useContext(progressContext);
+
+  console.log("progressContx", progressContx);
 
   const [valueInput, setValueInput] = useState("");
 
@@ -32,6 +34,13 @@ export default function Add() {
     ]);
     // close popUp
     popUpState.set({ ...popUpState, state: false });
+
+    // const percentCompleted = Number( (progressContx.numberCompleted*100/progressContx.total).toFixed(2));
+    // const WIDTH_100 = 22.5;
+    // const width = (progressContx.percentCompleted*WIDTH_100)/100;
+
+    // // update progress  ( repeat calculate width )
+    // progressContx.set({ ...progressContx, total: tasksContx.value.length + 1  ,percentCompleted:percentCompleted ,  width:width});
   };
 
   return (

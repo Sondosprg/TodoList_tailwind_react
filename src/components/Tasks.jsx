@@ -6,6 +6,7 @@ import { useState, useContext } from "react";
 import { tasksContext } from "../contexts/tasks.js";
 import { popUpContext } from "../contexts/popUp.js";
 import { taskContext } from "../contexts/task.js";
+import { progressContext } from "../contexts/progress";
 
 import { getTask, getIndex } from "../utils/array.js";
 
@@ -15,6 +16,7 @@ export default function Tasks() {
   const ALL_OPERATIONS = ["edit", "delete"];
   const tasksContx = useContext(tasksContext);
   const popUpState = useContext(popUpContext);
+  const progressContx = useContext(progressContext);
 
   let taskInfo = useContext(taskContext);
   const [operation, setOperation] = useState("");
@@ -33,7 +35,7 @@ export default function Tasks() {
   };
 
   const toCompleted=(id) => {
-           
+        
         const targetIndex = getIndex(tasksContx.value, id); // EXCEPTION : can become -1
         const targetCurrentIndex = getIndex(tasksContx.currentValue, id); // EXCEPTION : can become -1
 
@@ -54,7 +56,7 @@ export default function Tasks() {
           1,
           { ...taskInfo.current, isComplete: isCurrentCompleted },
         );
-        }
+        };
 
 
         // remove item from completed status if user click on complete btn
@@ -83,6 +85,15 @@ export default function Tasks() {
         }
 
         tasksContx.setCurrent([...updatedCurrentTasks]);
+
+        // const numberCompleted = isCurrentCompleted?progressContx.numberCompleted+1:progressContx.numberCompleted-1;
+        // const percentCompleted = Number( (numberCompleted*100/progressContx.total).toFixed(2));
+        // // 22.5rem <==> w-90 in tailwind (suppose as w-100 for calculate)
+        // const WIDTH_100 = 22.5;
+        // const width = (percentCompleted*WIDTH_100)/100;
+        // // update progress
+        // progressContx.set({...progressContx , numberCompleted : numberCompleted , percentCompleted:percentCompleted , width : width  });
+
   };
 
   const handleTasks = (e) => {

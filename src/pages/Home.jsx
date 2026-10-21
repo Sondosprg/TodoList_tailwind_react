@@ -10,6 +10,10 @@ import { useRef } from "react";
 import { tasksContext } from "../contexts/tasks.js";
 import { popUpContext } from "../contexts/popUp.js";
 import { taskContext } from "../contexts/task.js";
+import { progressContext } from "../contexts/progress.js";
+
+// utils
+import {getCompletedTasks} from "../utils/array.js";
 
 export default function Home() {
   // context of tasks
@@ -26,7 +30,25 @@ export default function Home() {
   // context of popUp
   const [popUpState, setPopUpState] = useState({ state: false, type: "" });
 
+  // context of task
   const task = useRef({ id: "", title: "", isComplete: false });
+
+  // ** context of progress **
+
+  // some info auto calculate
+  const WIDTH_100 = 22.5;
+  const NbTasks = tasks.length;
+  const NbCompleted = getCompletedTasks(tasks).length;
+  const PercentCompleted = Number( (NbCompleted*100/NbTasks).toFixed(2) );
+  const Width = (PercentCompleted*WIDTH_100)/100;
+
+  const [progress, setProgress] = useState({
+    total: 3,
+    numberCompleted: 0,
+    percentCompleted: 0  ,
+    width: 0 ,
+  });
+
 
   return (
     <>
@@ -48,10 +70,20 @@ export default function Home() {
           }}
         >
           <taskContext.Provider value={task}>
-            <main>
-              <Card />
-            </main>
-            <NavBar />
+            <progressContext.Provider
+              value={{
+                total: NbTasks,
+                numberCompleted: NbCompleted,
+                percentCompleted:PercentCompleted,
+                width:Width,
+                set: setProgress,
+              }}
+            >
+              <main>
+                <Card />
+              </main>
+              <NavBar />
+            </progressContext.Provider>
           </taskContext.Provider>
         </popUpContext.Provider>
       </tasksContext.Provider>
