@@ -86,13 +86,9 @@ export default function Tasks() {
 
         tasksContx.setCurrent([...updatedCurrentTasks]);
 
-        // const numberCompleted = isCurrentCompleted?progressContx.numberCompleted+1:progressContx.numberCompleted-1;
-        // const percentCompleted = Number( (numberCompleted*100/progressContx.total).toFixed(2));
-        // // 22.5rem <==> w-90 in tailwind (suppose as w-100 for calculate)
-        // const WIDTH_100 = 22.5;
-        // const width = (percentCompleted*WIDTH_100)/100;
-        // // update progress
-        // progressContx.set({...progressContx , numberCompleted : numberCompleted , percentCompleted:percentCompleted , width : width  });
+        
+
+
 
   };
 

@@ -33,21 +33,13 @@ export default function Home() {
   // context of task
   const task = useRef({ id: "", title: "", isComplete: false });
 
-  // ** context of progress **
-
-  // some info auto calculate
+  // **  progress **
   const WIDTH_100 = 22.5;
   const NbTasks = tasks.length;
   const NbCompleted = getCompletedTasks(tasks).length;
   const PercentCompleted = Number( (NbCompleted*100/NbTasks).toFixed(2) );
   const Width = (PercentCompleted*WIDTH_100)/100;
 
-  const [progress, setProgress] = useState({
-    total: 3,
-    numberCompleted: 0,
-    percentCompleted: 0  ,
-    width: 0 ,
-  });
 
 
   return (
@@ -76,7 +68,6 @@ export default function Home() {
                 numberCompleted: NbCompleted,
                 percentCompleted:PercentCompleted,
                 width:Width,
-                set: setProgress,
               }}
             >
               <main>

@@ -5,5 +5,4 @@ export let progressContext = createContext({
   numberCompleted: 0,
   percentCompleted: 0,
   width: 0,
-  set: null,
 });

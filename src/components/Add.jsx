@@ -35,6 +35,11 @@ export default function Add() {
     // close popUp
     popUpState.set({ ...popUpState, state: false });
 
+
+            console.log("(progressContx.percentCompleted*22.5)/100 " , (progressContx.percentCompleted*22.5)/100 );
+    // update width of progress
+  //  progressContx.set((progressContx.percentCompleted*22.5)/100);
+
     // const percentCompleted = Number( (progressContx.numberCompleted*100/progressContx.total).toFixed(2));
     // const WIDTH_100 = 22.5;
     // const width = (progressContx.percentCompleted*WIDTH_100)/100;
