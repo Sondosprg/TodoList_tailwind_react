@@ -1,17 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?&family=Kulim+Park:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600;1,700");
 @import "tailwindcss";
 
-
-@keyframes progress{
-  0%{
-    width: 0;
-  } 
-  100%{
-    width: 2rem;
-  }
-}
 @theme {
-
   --color-primary: #d6a99d;
   --color-secondary: #fbf3d5;
   --color-accent: #d6dac8;
@@ -22,8 +12,6 @@
   --font-main: "Kulim Park", sans-serif;
 
   --breakpoint-xs: 200px;
-
-  --animate-progress:progress  1s  ease-out 0.1s  infinite ;
 }
 
 @layer base {
@@ -32,14 +20,11 @@
   }
 
   .container {
-    @apply max-w-md py-2 px-6;
+    @apply max-w-sm py-2 px-6 xs:w-50;
   }
 }
 
 @layer components {
-
-  
- 
   /* btns */
   .btn-primary {
     @apply bg-primary p-1 rounded-md hover:cursor-pointer active:scale-95 transition;
@@ -50,31 +35,81 @@
     @apply bg-secondary w-100 rounded-xl h-100 shadow-2xl shadow-black flex flex-col space-y-6;
   }
 
+  /* navBar */
   .navBar {
     @apply rounded-2xl mt-4 flex justify-center items-center gap-3  shadow-2xl shadow-black;
+  }
+
+  .navBar-btn {
+    @apply transition  text-sm font-semibold text-gray-800  rounded-md text-center hover:bg-primary w-auto p-1   hover:cursor-pointer hover:shadow active:scale-95;
+  }
+
+  .navbar-btn-active {
+    @apply transition  text-sm font-semibold text-gray-800  rounded-md text-center hover:opacity-90 w-auto p-1   hover:cursor-pointer hover:shadow active:scale-95 bg-primary;
   }
   .navBar-list {
     @apply hover:bg-primary   hover:scale-[95%] hover:shadow-md hover:cursor-pointer px-6 rounded-xl py-3 transition;
   }
 
-  .checkbox-task {
-    @apply accent-primary;
+  /* header */
+  .header {
+    @apply flex items-center  h-10  pl-5 shadow  rounded-xl   bg-secondary mt-5;
   }
 
-  .checkbox-task:checked + .title-task {
-    @apply underline;
+  .header-title {
+    @apply uppercase font-bold text-primary;
   }
-  /* .header-card{
-    
 
-   } */
-  .menu:active {
-    @apply bg-primary rounded-md;
+  .tasks {
+    @apply px-4  overflow-y-scroll flex flex-col gap-2 h-70 scrollbar-none cursor-pointer;
   }
+
+  .task {
+    @apply flex justify-between items-center  xs:items-start  hover:bg-primary/10   h-fit transition;
+  }
+
+  .title {
+    @apply row-span-1 w-full h-fit;
+  }
+  .completed {
+    @apply line-through text-dark;
+  }
+  .optionsTask {
+    @apply flex items-center xs:flex-col sm:flex-row h-fit gap-2;
+  }
+  .options-btn {
+    @apply size-5 hover:opacity-80 text-primary transition active:scale-95;
+  }
+
+  /* progress */
+  .wrapper-progress {
+    @apply bg-black/10 w-90 mx-auto h-3 rounded-full shadow;
+  }
+
+  .progress {
+    @apply bg-linear-to-r from-accent to-primary h-3 rounded-full;
+  }
+
+  .data-progress {
+    @apply flex justify-between mx-5 text-sm;
+  }
+
+  /* popup */
   .popUp {
     @apply size-20 bg-amber-800 hidden absolute;
   }
-  .menu:active > .popUp {
-    @apply flex;
+  .wrapper-popup {
+    @apply bg-gray-800/60 z-200 absolute w-full h-full inset-0 flex items-center justify-center;
+  }
+
+  .content-popup {
+    @apply bg-light rounded-md w-md h-25 text-sm  shadow flex flex-col gap-2 items-center justify-center;
+  }
+  .input-popup {
+    @apply border-2 border-dark/20 focus:outline-none focus:ring-primary focus:ring-2 focus:border-transparent rounded-sm p-1;
+  }
+
+  .footer {
+    @apply text-center mt-8 space-x-2;
   }
 }

@@ -5,56 +5,45 @@ import { useContext } from "react";
 import { tasksContext } from "../contexts/tasks.js";
 import { popUpContext } from "../contexts/popUp.js";
 
-import { getCompletedTasks , getNoCompletedTasks  } from "../utils/array.js";
+import { getCompletedTasks, getNoCompletedTasks } from "../utils/array.js";
 
 export default function NavBar() {
   const tasksContx = useContext(tasksContext);
   const popUpState = useContext(popUpContext);
 
-  console.log("navbar");
-
   const showAllTasks = () => {
-    console.log("ALL");
-
     tasksContx.setState("all");
     const allTasks = [...tasksContx.value];
     tasksContx.setCurrent([...allTasks]);
   };
 
   const showCompletedTasks = () => {
-    console.log("COMPLETED");
-
     tasksContx.setState("completed");
     const completedTasks = getCompletedTasks(tasksContx.value);
     tasksContx.setCurrent([...completedTasks]);
   };
 
   const showNoCompletedTasks = () => {
-    console.log("NO COMPLETED");
-
     tasksContx.setState("no_completed");
     const noCompletedTasks = getNoCompletedTasks(tasksContx.value);
     tasksContx.setCurrent([...noCompletedTasks]);
   };
 
-
-
   return (
     <>
-      <header className="flex items-center  h-10  pl-5 shadow  rounded-xl   bg-secondary mt-5 ">
+      <header className="header">
         <nav>
           <ul className="flex gap-6">
             {/* add btn */}
             <li
               onClick={() => {
-                // addTask();
                 popUpState.set({
                   ...popUpState,
                   state: true,
                   type: "add",
                 });
               }}
-              className="transition  text-sm font-semibold text-gray-800  rounded-md text-center hover:opacity-90 w-auto p-1   hover:cursor-pointer hover:shadow active:scale-95 bg-primary"
+              className="navbar-btn-active"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -70,22 +59,14 @@ export default function NavBar() {
               </svg>
             </li>
 
-            <li
-              onClick={showAllTasks}
-              className="transition  text-sm font-semibold text-gray-800  rounded-md text-center hover:bg-primary w-auto p-1   hover:cursor-pointer hover:shadow active:scale-95"
-            >
+            {/* btns */}
+            <li onClick={showAllTasks} className="navBar-btn">
               all
             </li>
-            <li
-              onClick={showCompletedTasks}
-              className="transition  text-sm font-semibold text-gray-800 rounded-md text-center hover:bg-primary w-auto p-1  hover:cursor-pointer hover:shadow active:scale-95"
-            >
+            <li onClick={showCompletedTasks} className="navBar-btn">
               completed
             </li>
-            <li
-              onClick={showNoCompletedTasks}
-              className="transition text-sm font-semibold text-gray-800 rounded-md text-center hover:bg-primary w-auto p-1  hover:cursor-pointer hover:shadow active:scale-95"
-            >
+            <li onClick={showNoCompletedTasks} className="navBar-btn">
               pending
             </li>
           </ul>

@@ -8,7 +8,6 @@ import { getIndex } from "../utils/array.js";
 export default function Edit() {
   const tasksContx = useContext(tasksContext);
   const popUpState = useContext(popUpContext);
-
   const taskInfo = useContext(taskContext);
 
   const [taskValue, setTaskValue] = useState(taskInfo.current.title);
@@ -17,7 +16,7 @@ export default function Edit() {
     if (taskValue == "") {
       return;
     }
-    console.log("edit");
+
     const id = taskInfo.current.id;
 
     const targetIndex = getIndex(tasksContx.value, id); // EXCEPTION : can become -1
@@ -44,10 +43,11 @@ export default function Edit() {
     <>
       <div className="space-x-2">
         <input
+          autoFocus={popUpState.state}
           value={taskValue}
           onChange={(e) => setTaskValue(e.target.value)}
           type="text"
-          className="border-2 border-dark/20 focus:outline-none focus:ring-primary focus:ring-2 focus:border-transparent rounded-sm p-1"
+          className="input-popup "
         />
         <button type="submit" className="btn-primary" onClick={editTask}>
           edit

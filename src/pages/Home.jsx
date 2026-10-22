@@ -1,6 +1,7 @@
 // components
 import Card from "../components/Card.jsx";
 import NavBar from "../components/NavBar.jsx";
+import Footer from "../components/footer.jsx";
 
 // hooks
 import { useState } from "react";
@@ -13,7 +14,7 @@ import { taskContext } from "../contexts/task.js";
 import { progressContext } from "../contexts/progress.js";
 
 // utils
-import {getCompletedTasks} from "../utils/array.js";
+import { getCompletedTasks } from "../utils/array.js";
 
 export default function Home() {
   // context of tasks
@@ -37,10 +38,8 @@ export default function Home() {
   const WIDTH_100 = 22.5;
   const NbTasks = tasks.length;
   const NbCompleted = getCompletedTasks(tasks).length;
-  const PercentCompleted = Number( (NbCompleted*100/NbTasks).toFixed(2) );
-  const Width = (PercentCompleted*WIDTH_100)/100;
-
-
+  const PercentCompleted = Number(((NbCompleted * 100) / NbTasks).toFixed(2));
+  const Width = (PercentCompleted * WIDTH_100) / 100;
 
   return (
     <>
@@ -66,14 +65,15 @@ export default function Home() {
               value={{
                 total: NbTasks,
                 numberCompleted: NbCompleted,
-                percentCompleted:PercentCompleted,
-                width:Width,
+                percentCompleted: PercentCompleted,
+                width: Width,
               }}
             >
               <main>
                 <Card />
               </main>
               <NavBar />
+              <Footer/>
             </progressContext.Provider>
           </taskContext.Provider>
         </popUpContext.Provider>

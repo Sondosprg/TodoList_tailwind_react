@@ -4,19 +4,12 @@ import { tasksContext } from "../contexts/tasks.js";
 import { popUpContext } from "../contexts/popUp.js";
 import { taskContext } from "../contexts/task.js";
 
-import { progressContext } from "../contexts/progress";
-
 export default function Delete() {
   const tasksContx = useContext(tasksContext);
   const popUpState = useContext(popUpContext);
-
   const taskInfo = useContext(taskContext);
-  const progressContx = useContext(progressContext);
 
   const deleteTask = () => {
-    console.log("delete");
-    console.log("# contextId", taskInfo);
-
     const updatedTasks = tasksContx.value.filter(
       (task) => task.id != taskInfo.current.id,
     );
@@ -28,9 +21,6 @@ export default function Delete() {
     tasksContx.setCurrent([...updatedCurrentTasks]);
 
     popUpState.set({ ...popUpState, state: false });
-    
-    // update progress
-    progressContx.set({...progressContx , total : (tasksContx.value.length-1)});
   };
 
   return (

@@ -3,14 +3,10 @@ import { useContext } from "react";
 
 import { tasksContext } from "../contexts/tasks.js";
 import { popUpContext } from "../contexts/popUp.js";
-import { progressContext } from "../contexts/progress";
 
 export default function Add() {
   const tasksContx = useContext(tasksContext);
   const popUpState = useContext(popUpContext);
-  const progressContx = useContext(progressContext);
-
-  console.log("progressContx", progressContx);
 
   const [valueInput, setValueInput] = useState("");
 
@@ -34,30 +30,19 @@ export default function Add() {
     ]);
     // close popUp
     popUpState.set({ ...popUpState, state: false });
-
-
-            console.log("(progressContx.percentCompleted*22.5)/100 " , (progressContx.percentCompleted*22.5)/100 );
-    // update width of progress
-  //  progressContx.set((progressContx.percentCompleted*22.5)/100);
-
-    // const percentCompleted = Number( (progressContx.numberCompleted*100/progressContx.total).toFixed(2));
-    // const WIDTH_100 = 22.5;
-    // const width = (progressContx.percentCompleted*WIDTH_100)/100;
-
-    // // update progress  ( repeat calculate width )
-    // progressContx.set({ ...progressContx, total: tasksContx.value.length + 1  ,percentCompleted:percentCompleted ,  width:width});
   };
 
   return (
     <>
       <div className="space-x-2">
         <input
+          autoFocus={popUpState.state}
           type="text"
           value={valueInput}
           onChange={(e) => {
             setValueInput(e.target.value);
           }}
-          className="border-2 border-dark/20 focus:outline-none focus:ring-primary focus:ring-2 focus:border-transparent rounded-sm p-1"
+          className="input-popup"
         />
         <button
           value={valueInput}
