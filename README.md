@@ -1,4 +1,4 @@
-<h1 style="color: #d6a99d;font-weight:bold;font-style:italic ; font-size:3rem;">ToDoList with (React + Tailwind CSS)</h1>
+# ***ToDoList with (React + Tailwind CSS)***
 
 ## An interactive and fully-featured task management application
 
@@ -35,7 +35,7 @@
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/username/repository-name.git](https://github.com/username/repository-name.git)
+   git clone https://github.com/Sondosprg/TodoList_tailwind_react.git
    ```
 2. ```bash
    npm install
