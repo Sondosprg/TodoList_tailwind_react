@@ -1,13 +1,18 @@
-# ***ToDoList with (React + Tailwind CSS)***
+# **_ToDoList with (React + Tailwind CSS)_**
 
 ## An interactive and fully-featured task management application
 
 ## **Video Demo:**
+
 <video src="public/videos/video_readme.mp4" autoplay loop muted playsinline width="100%">
   Your browser does not support the video tag.
 </video>
 
 ---
+
+## **image : **
+
+![useCase](public/imgs/preview.PNG)
 
 ## Features
 
@@ -20,7 +25,7 @@
 
 ## Use Cases (using https://www.drawio.com/)
 
-![useCase](public/imgs/image.png)
+![useCase](public/imgs/useCase.png)
 
 ---
 
