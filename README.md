@@ -1,6 +1,6 @@
 # **_ToDoList with (React + Tailwind CSS)_**
 
-### > An interactive and fully-featured task management application
+> An interactive and fully-featured task management application
 
 ## **Video Demo:**
 
@@ -15,7 +15,7 @@
 ![useCase](public/imgs/preview.PNG)
 
 ## link :
-[]
+[https://todo-list-tailwind-react-ebon.vercel.app/]
 
 ## Features
 
