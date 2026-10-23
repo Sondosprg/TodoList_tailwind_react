@@ -1,6 +1,6 @@
 import PopUp from "./popUp";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import { tasksContext } from "../contexts/tasks.js";
 import { popUpContext } from "../contexts/popUp.js";
@@ -29,6 +29,23 @@ export default function NavBar() {
     tasksContx.setCurrent([...noCompletedTasks]);
   };
 
+  const navBarLinks = {
+    all: "header-btn-active",
+    completed: "header-btn",
+    no_completed: "header-btn",
+  };
+
+  const [activeClass, setActiveClass] = useState(navBarLinks);
+
+  const handelActiveClass = (btnId) => {
+    const otherLinks = Object.keys(navBarLinks).filter((link) => link != btnId);
+    setActiveClass({
+      [btnId]: "header-btn-active",
+      [otherLinks[0]]: "header-btn",
+      [otherLinks[1]]: "header-btn",
+    });
+  };
+
   return (
     <>
       <header className="header">
@@ -36,7 +53,6 @@ export default function NavBar() {
           <ul className="flex gap-6">
             {/* add btn */}
             <li
-              data-testid="add-btn"
               onClick={() => {
                 popUpState.set({
                   ...popUpState,
@@ -44,7 +60,7 @@ export default function NavBar() {
                   type: "add",
                 });
               }}
-              className="header-btn-active"
+              className="header-btn-active bg-transparent text-primary shadow"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -61,13 +77,34 @@ export default function NavBar() {
             </li>
 
             {/* btns */}
-            <li onClick={showAllTasks} className="header-btn">
+            <li
+              data-btnid="all"
+              onClick={(e) => {
+                showAllTasks();
+                handelActiveClass(e.target.dataset.btnid);
+              }}
+              className={activeClass["all"]}
+            >
               all
             </li>
-            <li onClick={showCompletedTasks} className="header-btn">
+            <li
+              data-btnid="completed"
+              onClick={(e) => {
+                showCompletedTasks();
+                handelActiveClass(e.target.dataset.btnid);
+              }}
+              className={activeClass["completed"]}
+            >
               completed
             </li>
-            <li onClick={showNoCompletedTasks} className="header-btn">
+            <li
+              data-btnid="no_completed"
+              onClick={(e) => {
+                showNoCompletedTasks();
+                handelActiveClass(e.target.dataset.btnid);
+              }}
+              className={activeClass["no_completed"]}
+            >
               pending
             </li>
           </ul>

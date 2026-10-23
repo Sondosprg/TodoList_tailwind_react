@@ -11,7 +11,8 @@
 
   --font-main: "Kulim Park", sans-serif;
 
-  --breakpoint-xs: 200px;
+
+  --breakpoint-xs: 400px;
 }
 
 @layer base {
@@ -29,7 +30,7 @@
   }
 
   #root {
-    @apply flex justify-center items-center flex-col w-100  scale-80  sm:scale-100;
+    @apply flex justify-center items-center flex-col w-100;
   }
 }
 
@@ -41,12 +42,12 @@
 
   /* card */
   .main-card {
-    @apply bg-secondary w-97  rounded-xl  shadow-2xl shadow-black flex flex-col space-y-6;
+    @apply bg-secondary w-[97vw] mx-5 xs:mx-0 xs:w-97   rounded-xl  shadow-2xl shadow-black flex flex-col space-y-4 sm:space-y-6;
   }
 
   /* header */
   .header {
-    @apply w-97 flex items-center  h-10 pl-5 shadow  rounded-xl   bg-secondary mt-5;
+    @apply w-[97vw] xs:w-97 flex items-center  h-10 pl-5 shadow  rounded-xl   bg-secondary mt-5;
   }
 
   .header-btn {
@@ -66,11 +67,11 @@
   }
 
   .tasks {
-    @apply px-4 overflow-y-scroll flex flex-col gap-2 h-70 scrollbar-none cursor-pointer;
+    @apply px-2 sm:px-4 overflow-y-scroll flex flex-col gap-2 h-70 scrollbar-none cursor-pointer;
   }
 
   .task {
-    @apply flex justify-between items-center   hover:bg-primary/10   h-fit transition rounded-md p-2;
+    @apply flex gap-1  sm:justify-between items-center   hover:bg-primary/10   h-fit transition rounded-md p-2;
   }
 
   .title {
