@@ -1,6 +1,6 @@
 # **_ToDoList with (React + Tailwind CSS)_**
 
-## An interactive and fully-featured task management application
+### > An interactive and fully-featured task management application
 
 ## **Video Demo:**
 
@@ -10,9 +10,12 @@
 
 ---
 
-## **image : **
+## **image :**
 
 ![useCase](public/imgs/preview.PNG)
+
+## link :
+[]
 
 ## Features
 
@@ -50,6 +53,6 @@
     npm run dev
    ```
 
-## Built by: []
+## Built by: [cherifi soundous]
 
 🌟 If you like this project, don't forget to give it a star on GitHub!
