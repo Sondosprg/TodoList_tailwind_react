@@ -17,8 +17,8 @@ export const getCompletedTasks = (tasks) => {
 };
 
 
-
 export const getNoCompletedTasks = (tasks) => {
   const noCompletedTasks = tasks.filter((taskC) => taskC.isComplete === false);
   return noCompletedTasks;
 };
+

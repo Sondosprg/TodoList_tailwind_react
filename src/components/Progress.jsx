@@ -21,7 +21,7 @@ export default function Progress() {
   return (
     <>
       <style>{progressAnimation}</style>
-      <div className="py-4">
+      <div className="py-4  overflow-x-scroll ">
         <div className="wrapper-progress ">
           <div
             style={{

@@ -4,11 +4,11 @@ export default function Footer() {
       <footer className="footer">
         <p>
           &copy; copyright soLogic 2026
-          <a href="https://github.com/Sondosprg" className="underline" > github</a>
+          <a href="https://github.com/Sondosprg" className="footer-links">
+            {" "}
+            github
+          </a>
         </p>
-         
-        
-       
       </footer>
     </>
   );

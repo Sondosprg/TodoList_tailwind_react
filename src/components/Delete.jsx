@@ -9,16 +9,21 @@ export default function Delete() {
   const popUpState = useContext(popUpContext);
   const taskInfo = useContext(taskContext);
 
-  const deleteTask = () => {
-    const updatedTasks = tasksContx.value.filter(
-      (task) => task.id != taskInfo.current.id,
-    );
-    const updatedCurrentTasks = tasksContx.currentValue.filter(
-      (task) => task.id != taskInfo.current.id,
-    );
 
-    tasksContx.set([...updatedTasks]);
-    tasksContx.setCurrent([...updatedCurrentTasks]);
+  const getUpdateTasks=(tasks)=>{
+    const tasksUpdated = tasks.filter(
+      (task) => task.id != taskInfo.current.id,
+    );
+    return tasksUpdated;
+  };
+
+  const deleteTask = () => {
+
+    const tasksUpdated = getUpdateTasks(tasksContx.value);
+    const currentTasksUpdated = getUpdateTasks(tasksContx.currentValue);
+
+    tasksContx.set([...tasksUpdated]);
+    tasksContx.setCurrent([...currentTasksUpdated]);
 
     popUpState.set({ ...popUpState, state: false });
   };

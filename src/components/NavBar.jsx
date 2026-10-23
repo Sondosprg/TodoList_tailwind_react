@@ -36,6 +36,7 @@ export default function NavBar() {
           <ul className="flex gap-6">
             {/* add btn */}
             <li
+              data-testid="add-btn"
               onClick={() => {
                 popUpState.set({
                   ...popUpState,
@@ -43,7 +44,7 @@ export default function NavBar() {
                   type: "add",
                 });
               }}
-              className="navbar-btn-active"
+              className="header-btn-active"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -60,13 +61,13 @@ export default function NavBar() {
             </li>
 
             {/* btns */}
-            <li onClick={showAllTasks} className="navBar-btn">
+            <li onClick={showAllTasks} className="header-btn">
               all
             </li>
-            <li onClick={showCompletedTasks} className="navBar-btn">
+            <li onClick={showCompletedTasks} className="header-btn">
               completed
             </li>
-            <li onClick={showNoCompletedTasks} className="navBar-btn">
+            <li onClick={showNoCompletedTasks} className="header-btn">
               pending
             </li>
           </ul>

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?&family=Kulim+Park:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600;1,700");
+@import url("https://fonts.googleapis.com/css2?family=Kulim+Park:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600;1,700&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -16,11 +16,20 @@
 
 @layer base {
   body {
-    @apply bg-linear-to-r from-gray-200 to-gray-300 h-screen w-screen flex justify-center items-center;
+    @apply bg-linear-to-r from-gray-200 to-gray-300 h-screen w-screen flex justify-center items-center font-main;
   }
 
-  .container {
-    @apply max-w-sm py-2 px-6 xs:w-50;
+  html,
+  body {
+    @apply overflow-x-hidden;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  #root {
+    @apply flex justify-center items-center flex-col w-100  scale-80  sm:scale-100;
   }
 }
 
@@ -32,40 +41,36 @@
 
   /* card */
   .main-card {
-    @apply bg-secondary w-100 rounded-xl h-100 shadow-2xl shadow-black flex flex-col space-y-6;
-  }
-
-  /* navBar */
-  .navBar {
-    @apply rounded-2xl mt-4 flex justify-center items-center gap-3  shadow-2xl shadow-black;
-  }
-
-  .navBar-btn {
-    @apply transition  text-sm font-semibold text-gray-800  rounded-md text-center hover:bg-primary w-auto p-1   hover:cursor-pointer hover:shadow active:scale-95;
-  }
-
-  .navbar-btn-active {
-    @apply transition  text-sm font-semibold text-gray-800  rounded-md text-center hover:opacity-90 w-auto p-1   hover:cursor-pointer hover:shadow active:scale-95 bg-primary;
-  }
-  .navBar-list {
-    @apply hover:bg-primary   hover:scale-[95%] hover:shadow-md hover:cursor-pointer px-6 rounded-xl py-3 transition;
+    @apply bg-secondary w-97  rounded-xl  shadow-2xl shadow-black flex flex-col space-y-6;
   }
 
   /* header */
   .header {
-    @apply flex items-center  h-10  pl-5 shadow  rounded-xl   bg-secondary mt-5;
+    @apply w-97 flex items-center  h-10 pl-5 shadow  rounded-xl   bg-secondary mt-5;
   }
 
-  .header-title {
+  .header-btn {
+    @apply transition  text-sm font-semibold text-gray-800  rounded-md text-center hover:bg-primary w-auto p-1   hover:cursor-pointer hover:shadow active:scale-95;
+  }
+
+  .header-btn-active {
+    @apply transition  text-sm font-semibold text-gray-800  rounded-md text-center hover:opacity-90 w-auto p-1   hover:cursor-pointer hover:shadow active:scale-95 bg-primary;
+  }
+
+  .header-list {
+    @apply hover:bg-primary   hover:scale-[95%] hover:shadow-md hover:cursor-pointer px-6 rounded-xl py-3 transition;
+  }
+
+  .card-title {
     @apply uppercase font-bold text-primary;
   }
 
   .tasks {
-    @apply px-4  overflow-y-scroll flex flex-col gap-2 h-70 scrollbar-none cursor-pointer;
+    @apply px-4 overflow-y-scroll flex flex-col gap-2 h-70 scrollbar-none cursor-pointer;
   }
 
   .task {
-    @apply flex justify-between items-center  xs:items-start  hover:bg-primary/10   h-fit transition;
+    @apply flex justify-between items-center   hover:bg-primary/10   h-fit transition rounded-md p-2;
   }
 
   .title {
@@ -83,11 +88,11 @@
 
   /* progress */
   .wrapper-progress {
-    @apply bg-black/10 w-90 mx-auto h-3 rounded-full shadow;
+    @apply bg-black/10 h-3 w-90   mx-auto rounded-full shadow;
   }
 
   .progress {
-    @apply bg-linear-to-r from-accent to-primary h-3 rounded-full;
+    @apply bg-linear-to-r  from-accent to-primary h-3 rounded-full transition-all duration-300;
   }
 
   .data-progress {
@@ -99,7 +104,7 @@
     @apply size-20 bg-amber-800 hidden absolute;
   }
   .wrapper-popup {
-    @apply bg-gray-800/60 z-200 absolute w-full h-full inset-0 flex items-center justify-center;
+    @apply bg-gray-800/60 z-200 absolute h-full w-full inset-0 flex items-center justify-center;
   }
 
   .content-popup {
@@ -110,6 +115,10 @@
   }
 
   .footer {
-    @apply text-center mt-8 space-x-2;
+    @apply text-center mt-8 space-x-2 text-xs text-gray-700;
+  }
+
+  .footer-links {
+    @apply text-red-900 underline font-bold;
   }
 }
