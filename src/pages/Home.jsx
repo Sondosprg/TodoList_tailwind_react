@@ -1,7 +1,7 @@
 // components
 import Card from "../components/Card.jsx";
 import NavBar from "../components/NavBar.jsx";
-import Footer from "../components/footer.jsx";
+import Footer from "../components/Footer.jsx";
 
 // hooks
 import { useState } from "react";
