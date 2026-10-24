@@ -107,7 +107,6 @@ export default function Tasks() {
 
       // make as completed tasks
       if (e.target.closest(".Completed")) {
-        console.log("Completed");
         updateId(id);
         updateTitle(id);
         updateComplete(id);

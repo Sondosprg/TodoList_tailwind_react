@@ -38,7 +38,7 @@ export default function Home() {
   const WIDTH_100 = 22.5;
   const NbTasks = tasks.length;
   const NbCompleted = getCompletedTasks(tasks).length;
-  const PercentCompleted = Number(((NbCompleted * 100) / NbTasks).toFixed(2));
+  const PercentCompleted = NbTasks===0?0:Number(((NbCompleted * 100) / NbTasks).toFixed(2));
   const Width = (PercentCompleted * WIDTH_100) / 100;
 
   return (
